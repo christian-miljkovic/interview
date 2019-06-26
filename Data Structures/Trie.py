@@ -2,11 +2,33 @@
 
 class Trie:
 
-    def __init__(self):
+    def __init__(self, isSuffix=False):
         self.root = TrieNode(None)
+        # Determines if we are creating a regular Trie or Suffix Trie
+        self.isSuffix = isSuffix
     
     def insert(self, word):
+        if(not self.isSuffix):
+            self.insertInternal(word)
+        else:
+            listOfSuffixes = self.createAllSuffixes(word)
+            listOfSuffixes.append(word)
+            for suffix in listOfSuffixes:
+                self.insertInternal(suffix)
 
+
+    def createAllSuffixes(self, word):
+        
+        if(len(word) <= 1):
+            return [word]
+
+        listOfSuffixes = []
+        for index in range(len(word) - 1, 0, -1):
+            listOfSuffixes.append(word[index:])
+        
+        return listOfSuffixes
+        
+    def insertInternal(self, word):
         # dictionary of all the roots children 
         temp_trie = self.root
         for char in word:
@@ -63,6 +85,9 @@ testTrie.insert('hello')
 testTrie.insert('hey')
 testTrie.toString()
 print(testTrie.find('he'))
-print(testTrie.find('hey'))
-print(testTrie.find('helo'))
 print(testTrie.find('hello'))
+
+testSuffixTrie = Trie(True)
+testSuffixTrie.insert('hello')
+testSuffixTrie.toString()
+print(testSuffixTrie.find('ell'))
