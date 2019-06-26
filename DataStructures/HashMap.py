@@ -32,11 +32,12 @@ class HashMap:
             hashList.append(queue)
         return hashList
 
-testHashMap = HashMap(4)
-print(testHashMap.toString())
-testHashMap.insert('hello')
-print(testHashMap.toString())
-testHashMap.insert('worldz')
-print(testHashMap.toString())
-testHashMap.delete('hello')
-print(testHashMap.toString())
+if __name__ == '__main__':
+    testHashMap = HashMap(4)
+    print(testHashMap.toString())
+    testHashMap.insert('hello')
+    print(testHashMap.toString())
+    testHashMap.insert('worldz')
+    print(testHashMap.toString())
+    testHashMap.delete('hello')
+    print(testHashMap.toString())

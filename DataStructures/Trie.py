@@ -80,12 +80,13 @@ class TrieNode:
         self.children = dict()
         self.isCompleteWord = False
 
-testTrie = Trie()
-testTrie.insert('hello')
-testTrie.insert('hey')
-testTrie.toString()
-print(testTrie.find('he'))
-print(testTrie.find('hello'))
+if __name__ == '__main__':
+    testTrie = Trie()
+    testTrie.insert('hello')
+    testTrie.insert('hey')
+    testTrie.toString()
+    print(testTrie.find('he'))
+    print(testTrie.find('hello'))
 
 testSuffixTrie = Trie(True)
 testSuffixTrie.insert('hello')

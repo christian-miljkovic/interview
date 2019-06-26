@@ -33,8 +33,9 @@ class BinaryHeap:
         else:
             return True
 
-testList = [10,13,15,27,38,50]
-testBHeap = BinaryHeap(testList)
-print(testBHeap.heap)
-testBHeap.insert(12)
-print(testBHeap.heap)
+if __name__ == '__main__':
+    testList = [10,13,15,27,38,50]
+    testBHeap = BinaryHeap(testList)
+    print(testBHeap.heap)
+    testBHeap.insert(12)
+    print(testBHeap.heap)

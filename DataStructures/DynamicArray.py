@@ -27,23 +27,24 @@ class DynamicArray:
         self.list.extend(newBuffer)
         self.capacity = len(self.list)
 
-testArray = DynamicArray()
-print(testArray.list)
+if __name__ == '__main__':
+    testArray = DynamicArray()
+    print(testArray.list)
 
-for i in range(0,10):
-    testArray.append(i)
-print(testArray.list)
+    for i in range(0,10):
+        testArray.append(i)
+    print(testArray.list)
 
-testArray.append(-1)
-print(testArray.list)
-testArray.resize()
-print(testArray.list)
+    testArray.append(-1)
+    print(testArray.list)
+    testArray.resize()
+    print(testArray.list)
 
-for i in range(10,20):
-    testArray.append(i)
+    for i in range(10,20):
+        testArray.append(i)
 
-print(testArray.list)
-testArray.resize()
-print(testArray.list)
+    print(testArray.list)
+    testArray.resize()
+    print(testArray.list)
 
-    
+        

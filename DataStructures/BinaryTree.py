@@ -53,13 +53,14 @@ class Node:
         self.data = data
         self.height = 0
 
-testBTree = BinaryTree()
-testBTree.insert(5)
-testBTree.insert(3)
-testBTree.insert(10)
-testBTree.insert(1)
-testBTree.insert(2)
-testBTree.insert(16)
-testBTree.insert(18)
-testBTree.insert(14)
-print(testBTree.toString())
+if __name__ == '__main__':
+    testBTree = BinaryTree()
+    testBTree.insert(5)
+    testBTree.insert(3)
+    testBTree.insert(10)
+    testBTree.insert(1)
+    testBTree.insert(2)
+    testBTree.insert(16)
+    testBTree.insert(18)
+    testBTree.insert(14)
+    print(testBTree.toString())
