@@ -14,20 +14,22 @@ class AdjacencyList:
         self.graph[vertex] = listOfEdges
     
 
-    def depthFirstTraversal(self, vertexNumber):
+    def depthFirstTraversal(self, vertexNumber, isVisited):
+        
+        if(vertexNumber in isVisited):
+            return
+        else:
+            isVisited.append(vertexNumber)
 
-        # Do not need to have bool to indicate whether the vertex has been visited 
-        # Assume that the graph is a DAG (directed acyclic graph)
+        # If the vertex number doesn't exist in the graph then we know it is a leaf vertex and we still print
         print(vertexNumber)
-
-        # If the vertex number doesn't exist in the graph then we know it is a leaf vertex
         if(vertexNumber not in self.graph.keys()):
             return 
         
         listOfEdges = self.graph[vertexNumber]
 
         for child in listOfEdges:
-            self.depthFirstTraversal(child)
+            self.depthFirstTraversal(child,isVisited)
 
 if __name__ == "__main__":
     adjList = AdjacencyList()
@@ -35,4 +37,5 @@ if __name__ == "__main__":
     adjList.addNode(4,2,1)
     adjList.addNode(7,8,5)
     adjList.addNode(6,3)
-    adjList.depthFirstTraversal(0)
+    adjList.addNode(3,8)
+    adjList.depthFirstTraversal(0,[])
