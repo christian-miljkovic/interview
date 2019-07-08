@@ -1,4 +1,9 @@
-# Mergesort algorithm for sorting a list
+"""
+Mergesort algorithm for sorting a list
+Time Complexity: O(nlogn)
+Space Complexity: O(n) because we are essentially creating a new list for every item at the end of the recusrive call/stack
+"""
+
 import random
 
 def mergeSort(arrayToBeSorted):
