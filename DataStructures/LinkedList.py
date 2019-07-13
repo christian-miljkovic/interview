@@ -9,16 +9,25 @@ class LinkedList:
         self.linkedListLength = 0
         
     
+    def __str__(self):
+        linked_list = []
+        curr = self.head
+        while curr != None:
+            linked_list.append(curr.nodeData)
+            curr = curr.nextNode
+            
+        return ''.join(str(data) + ' ' for data in linked_list)
+    
     def addNode(self,data):
-        
         if(self.head == None):
             self.head = Node(data)
             self.previousNode = None
         else:
             newNode = Node(data)
-            newNode.next = self.head
+            newNode.nextNode = self.head
             self.head.previousNode = newNode
             self.head = newNode
+            
         self.linkedListLength += 1
     
     def findNode(self,data):
