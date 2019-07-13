@@ -50,13 +50,14 @@ def findDupe(head):
             hash_map[curr.nodeData] = True
             curr = curr.nextNode
 
-testLinkedList = LinkedList()
-testLinkedList.addNode(1)
-testLinkedList.addNode(5)
-testLinkedList.addNode(3)
-testLinkedList.addNode(6)
-testLinkedList.addNode(5)
-testLinkedList.addNode(4)
-print(testLinkedList)
-removeDupe(testLinkedList.head)
-print(testLinkedList)
+if __name__ == "__main__":
+    testLinkedList = LinkedList()
+    testLinkedList.addNode(1)
+    testLinkedList.addNode(5)
+    testLinkedList.addNode(3)
+    testLinkedList.addNode(6)
+    testLinkedList.addNode(5)
+    testLinkedList.addNode(4)
+    print(testLinkedList)
+    removeDupe(testLinkedList.head)
+    print(testLinkedList)

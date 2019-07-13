@@ -1,6 +1,8 @@
 """
 Chapter 1 Array's and Strings Check Permutation problem
 Given two strings write a method to decide if one is a permutation of the other.
+Time Complexity: O(mn)
+Space Complexity: O(mn)
 """
 
 def isPermutation(strOne, strTwo):
