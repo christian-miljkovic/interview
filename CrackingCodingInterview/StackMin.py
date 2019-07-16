@@ -2,6 +2,7 @@
 Chapter 3 Stacks and Queue
 Problem - Stack Min: How would you design a stack which, in addition to push and pop, 
 has a function min which returns the minimum element? Push, pop, and min should all operate in min O(1) time
+Solution: Add an additional array that keeps count of what is the current minVal in the form of another stack
 """
 
 class MinStack():
