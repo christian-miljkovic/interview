@@ -4,7 +4,7 @@ Problem - Route Between Nodes: Given a directed graph, design an algorithm to fi
 where there is a route between two nodes.
 """
 import sys
-sys.path.append('../DataStructures')
+sys.path.append('../../DataStructures')
 from DirectedGraph import Graph, Node
 from collections import deque
 

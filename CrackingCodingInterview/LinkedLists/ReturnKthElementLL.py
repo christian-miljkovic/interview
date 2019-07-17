@@ -3,7 +3,7 @@ Chapter 2 Linked List Questions
 Problem: Return Kth to Last: Implement an algorithm to find the kth to last element of singly linked list
 """
 import sys
-sys.path.append('../DataStructures')
+sys.path.append('../../DataStructures')
 from LinkedList import LinkedList
 
 

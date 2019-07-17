@@ -4,7 +4,7 @@ Problem - Minimal Tree: Given a sorted (increasing order) array with unique inte
 write an algorithm to create a binary search tree with minimal height.
 """
 import sys
-sys.path.append('../DataStructures')
+sys.path.append('../../DataStructures')
 from BinaryTree import Node
 
 def createMinTree(array):
