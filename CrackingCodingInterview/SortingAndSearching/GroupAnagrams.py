@@ -34,6 +34,6 @@ def sortAnagrams(anagramList):
 
 
 if __name__ == "__main__":
-    anagramList = ["belows","iceman","state","elbow","listen","taste","silent","elbosw","cinema","below"]
+    anagramList = ["keep","belows","iceman","state","elbow","listen","taste","silent","elbosw","cinema","below","peek"]
     print(sortAnagrams(anagramList))
 

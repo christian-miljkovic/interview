@@ -4,7 +4,7 @@ Problem -  Delete Middle Node: Implement an algorithm to delete a node in the mi
 and last node, not neccesarily the exact middle) of a singly linked list, given only access to that node
 """
 import sys
-sys.path.append('../DataStructures')
+sys.path.append('../../DataStructures')
 from LinkedList import LinkedList
 
 def removeMiddleNode(head):

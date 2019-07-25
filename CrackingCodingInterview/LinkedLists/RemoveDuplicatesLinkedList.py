@@ -11,7 +11,7 @@ right next to each other. This would however result in a time complexity of O(nl
 space complexity by not requiring any sort of buffer therefore O(1)
 """
 import sys
-sys.path.append('../DataStructures')
+sys.path.append('../../DataStructures')
 from LinkedList import LinkedList
 
 def removeDupe(head):

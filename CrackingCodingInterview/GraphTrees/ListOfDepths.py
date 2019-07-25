@@ -1,6 +1,8 @@
 """
 Chapter 4 - Trees and Graphs
 Problem - List of Depths: Given a binary tree, design an algorithm which creates a linked list of all the nodes at each depth
+Time Complexity: O(n)
+Space Complexity: O(n)
 """
 import sys
 sys.path.append('../../DataStructures')
