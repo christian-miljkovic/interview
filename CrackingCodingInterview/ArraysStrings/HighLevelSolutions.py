@@ -72,3 +72,37 @@ write a method to rotate the image by 90 degrees.
 
 Solution: See RotateMatrix.py
 """
+
+# 1.8 Zero Matrix
+"""
+Problem: Write an algorithm such that if an element in an MxN matrix is 0, its entire row 
+and column are set to 0.
+
+Solution: Assuming that we are not going to set the rows and columns as we are doing the initial loop through the matrix.
+First loop through the entire matrix and store all of the locations of zero's. Then create two 
+seperate methods setRowToZeros and setColToZeros. Then Loop through the previously stored locations.
+
+Time Complexity: Worst case you have all zeros in the matrix and meaning and then setRowToZeros runs in O(M)
+setColToZero runs in O(N) then you will be doing O(M+N) * M*N times therefore total time complexity O(N * M^2 + M * N^2)
+
+Optimization: During the initial loop through keep track of the rows and columns that you do not need to check since they will
+eventually be set to zero. This should reduce the number of time we have to perform the set to zero operations.
+"""
+
+# 1.9 String Rotation
+"""
+Problem: Assume you have a method isSubstring which checks if one word is a substring of another. 
+Given two strings, s1 and s2 write code to check if s2 is a rotation of s1 using only one call to isSubstring.
+
+Example: "waterbottle" is a rotation of "erbottlewat"
+
+Solution: Check if the strings are of the same length, if not return true. Loop through one string and hash each char 
+while incrementing the count, and do the same for the second string. If there are any odd counts then return false. Lastly,
+take the first and last chars of s2 concatenate them together and see if they are a substring of s1, if yes then return true otherwise false.
+
+Time Complexity: Where m is the length of the string O(m)
+
+Optimal Solution: s2 will always be a substring of s1+s1. Therefore concatenate s1 to itself and check if s2 is a substring
+if so return true. Assuming isSubstring is O(A+B) then the total run time sould be O(m) where m is the length of the string.
+
+"""
