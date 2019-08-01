@@ -1,4 +1,5 @@
-# Class for implementing BinaryHeap with the min at top 
+# Class for implementing BinaryHeap with the min at top
+# Time Complexity: Insert and Delete O(log(n))
 
 class BinaryHeap:
 
