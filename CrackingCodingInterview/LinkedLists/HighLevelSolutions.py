@@ -68,6 +68,36 @@ node. Note that the intersection is defined based on reference, not value. That 
 node of the first linked list is the exact same node (by reference) as the jth node of the second linkde list
 then they are interesting.
 
-Solution:
+Solution: Loop through each node in the linked list and hash each one of the nodes in a hash_table 
+setting the table to true. If when hashing the second list we find that we already had the node, then
+we know there is a intersection, and return that node.
 
+Time Complexity: O(n + m) where n is the length of the first linked list and m is the length of the second
+Space Complexity: O(n + m)
+
+Improvements: We know there is an intersection if the tail node of each linked list is the same. Therefore:
+1. Loop through each list to see if the last node is the same while also counting length, if not return None
+2. If one linked list is longer than the other, advance the starting pointer to by the difference in length.
+3. Loop through each list at the same time until the two pointers match at the same node
+4. Return the node
+
+Space Complexity: Reduced to O(1)
+"""
+
+# 2.8 Loop Detectiom
+"""
+Problem: Given a circular linked list, implement an algorithm that returns the node at the
+beginning of the loop.
+
+Example
+Input: A -> B -> C -> D -> E -> C
+Output: C
+
+Solution: Loop through each node and hash the reference, if the value already exists in the hashtable
+then we know there is a loop, and therefore return that node.
+
+Time Complexity: O(n) where n is the size of the linked list
+Space Complexity: O(n) where n is the size of the linked list and for every value stored in the hash_table
+
+Improvements: To reduce space complexity you could use a slow runner and fast runner method with two pointers
 """
