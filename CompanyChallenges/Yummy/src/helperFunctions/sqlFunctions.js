@@ -12,17 +12,30 @@ const sqlHelper = {
 
     getUserOrders: (client, userId) => {
 
-        client.query(`SELECT * FROM orders WHERE id=${userId}`, (err, result) =>{
-            if (err) throw err;
-            return result;
+        return new Promise((resolve, reject) => {
+            client.query(`SELECT * FROM orders WHERE id=${userId}`, (err, result) =>{
+                if (err){
+                    reject(err);
+                }
+                else{
+                    resolve(result[0]);
+                } 
             });
+        })
+        
     },
 
     getOrderAttributes: (client, orderId) => {
-        client.query(`SELECT * FROM order_attributes WHERE order_id=${orderId}`, (err, result) =>{
-            if (err) throw err;
-            return result;
+        return new Promise((resolve, reject) => {
+            client.query(`SELECT * FROM order_attributes WHERE order_id=${orderId}`, (err, result) =>{
+                if (err){
+                    reject(err);
+                }
+                else{
+                    resolve(result);
+                }
             });
+        })
     },
 
     getMealAttributes: (client, mealId) => {

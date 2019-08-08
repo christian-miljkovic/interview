@@ -1,6 +1,6 @@
 // index.js
-const sqlHelper = require('./helperFunctions/sqlFunctions.js'); 
 const jsonHelper = require('./helperFunctions/jsonifyFunctions.js');
+const generalHelper = require('./helperFunctions/generalFunctions.js');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -32,9 +32,35 @@ app.get('/api/v1/orders', async (req,res)=>{
     }
 
     const userId = req.query.user_id;
-    jsonHelper.jsonifyMeals(client,1,2).then(result=>{
-        res.send({body:result});
-    });
+    let userOrder = {}
+
+    
+    jsonHelper.jsonifyOrders(client,userId)
+    .then(result =>{
+        userOrder.orders = result;
+        
+        let orderAttributes = [];
+        jsonHelper.jsonifyOrderAttributes(client,userOrder.orders[0].id).then(result=>{
+            for(let i = 0; i < result.length; i++){
+                orderAttributes.push(result[i]);
+            }
+            let orderQuantity = generalHelper.getOrderSize(orderAttributes);
+            userOrder.orders.meal_count = orderQuantity;
+        })
+        // return orderAttributes
+        res.send({body:userOrder});
+    })
+    
+
+
+    // .then(result => {
+    //     jsonHelper.jsonifyMeals(client,result.id).then(result=>{
+    //         userOrder.orders.meals.push(result);
+    //         res.send({body:userOrder});
+    //     });
+    // })
+
+
 });
 
 app.listen(3000);
