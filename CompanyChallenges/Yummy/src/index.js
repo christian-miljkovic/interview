@@ -25,14 +25,16 @@ client.connect((err)=> {
 });
 
 // Main endpoint for application
-app.get('/api/v1/orders',(req,res)=>{
+app.get('/api/v1/orders', async (req,res)=>{
 
     if(Object.keys(req.query).length === 0){
         throw new Error('400: User Id is Required');
     }
 
     const userId = req.query.user_id;
-    res.send({body:jsonHelper.jsonifyMeals(client,1,2)});
+    jsonHelper.jsonifyMeals(client,1,2).then(result=>{
+        res.send({body:result});
+    });
 });
 
 app.listen(3000);

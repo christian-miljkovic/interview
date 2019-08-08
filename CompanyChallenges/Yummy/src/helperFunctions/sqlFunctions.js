@@ -26,10 +26,18 @@ const sqlHelper = {
     },
 
     getMealAttributes: (client, mealId) => {
-        client.query(`SELECT * FROM meals WHERE id=${mealId}`, (err, result) =>{
-            if (err) throw err;
-            return result[0];
+        const promise = new Promise((resolve, reject) => {
+            client.query(`SELECT * FROM meals WHERE id=${mealId}`, (err, result) =>{
+                if (err){
+                    reject(err);
+                } 
+                else{
+                    resolve(result[0]);
+                }
             });
+        })
+
+        return promise;
     }
 }
 
