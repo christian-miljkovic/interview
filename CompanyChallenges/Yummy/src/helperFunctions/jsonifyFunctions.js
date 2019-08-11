@@ -5,29 +5,37 @@ const util = require('util');
 
 const jsonHelper = {
 
-    jsonifyMeals : (client, mealId) => {
+    jsonifyMeals : (client, mealId, mealQuantity) => {
 
-
-        return sqlHelper.getMealAttributes(client, mealId).then(result=>{
-            let meal = {
-                "id":result.id,
-                "quantity": null,
-                "name":result.name,
-                "description": result.description,
-                "image_url": result.image_url
+        return sqlHelper.getMealAttributes(client, mealId, mealQuantity).then(result=>{
+            
+            if(result != null){
+                let meal = {
+                    "id":result.id,
+                    "quantity": mealQuantity,
+                    "name":result.name,
+                    "description": result.description,
+                    "image_url": result.image_url
+                }
+                return meal;
             }
-            return meal;
         });
     },
 
     jsonifyOrders : (client, userId) => {
 
         return sqlHelper.getUserOrders(client, userId).then(result=>{
-            let orders = {
-                "id":result.id,
-                "delivery_date": result.delivery_date,
-                "meal_count": null,
-                "meals":[],
+            
+            let orders = [];
+
+            for(let i = 0; i < result.length; i++){
+                let order = {
+                    "id":result[i].id,
+                    "delivery_date": result[i].delivery_date,
+                    "meal_count": null,
+                    "meals":[],
+                }
+                orders.push(order);
             }
             return orders;
         });

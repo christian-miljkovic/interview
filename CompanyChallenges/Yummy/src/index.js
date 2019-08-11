@@ -32,30 +32,39 @@ app.get('/api/v1/orders', async (req,res)=>{
     }
 
     const userId = req.query.user_id;
-    let userOrder = {}
+    let userOrder = {
+        "orders":[],
+    }
 
+    let currentIndex;
     
     jsonHelper.jsonifyOrders(client,userId)
-    .then(result =>{
-        userOrder.orders = result;
-        let orderAttributes = [];
-        jsonHelper.jsonifyOrderAttributes(client,userOrder.orders.id).then(result=>{
-            for(let i = 0; i < result.length; i++){
-                orderAttributes.push(result[i]);
-            }
-            let orderQuantity = generalHelper.getOrderSize(orderAttributes);
-            userOrder.orders.meal_count = orderQuantity;
-            return orderAttributes            
-        })
-        .then(result => {            
-            for(let i = 0; i < result.length; i++){
-                // look at the jsonify function thats where the issue is
-                jsonHelper.jsonifyMeals(client,result[i].id).then(result=>{
-                    userOrder.orders.meals.push(result);
-                    res.send({body:userOrder});
-                });
-            }
-        })    
+    .then(results =>{
+
+        for(let i = 0; i < results.length; i++){
+            
+            let order = results[i];
+            currentIndex = i;
+
+            userOrder.orders.push(order);
+            let orderAttributes = [];
+            jsonHelper.jsonifyOrderAttributes(client,order.id).then(result=>{
+                for(let i = 0; i < result.length; i++){
+                    orderAttributes.push(result[i]);
+                }
+                let orderQuantity = generalHelper.getOrderSize(orderAttributes);
+                userOrder.orders[currentIndex].meal_count = orderQuantity;
+                return orderAttributes;
+            })
+            .then(result => {            
+                for(let i = 0; i < result.length; i++){
+                    jsonHelper.jsonifyMeals(client,result[i].id, result[i].quantity).then(result=>{                        
+                        userOrder.orders[currentIndex].meals.push(result);
+                        res.send({body:userOrder});
+                    });
+                }
+            })
+        }    
     })
     
 });
