@@ -40,7 +40,6 @@ app.get('/api/v1/orders', async (req,res)=>{
     
     jsonHelper.jsonifyOrders(client,userId)
     .then(results =>{
-
         for(let i = 0; i < results.length; i++){
             
             let order = results[i];
@@ -48,25 +47,31 @@ app.get('/api/v1/orders', async (req,res)=>{
 
             userOrder.orders.push(order);
             let orderAttributes = [];
-            jsonHelper.jsonifyOrderAttributes(client,order.id).then(result=>{
+            jsonHelper.jsonifyOrderAttributes(client,order.id).then(result=>{                               
                 for(let i = 0; i < result.length; i++){
                     orderAttributes.push(result[i]);
                 }
                 let orderQuantity = generalHelper.getOrderSize(orderAttributes);
-                userOrder.orders[currentIndex].meal_count = orderQuantity;
-                return orderAttributes;
-            })
-            .then(result => {            
-                for(let i = 0; i < result.length; i++){
-                    jsonHelper.jsonifyMeals(client,result[i].id, result[i].quantity).then(result=>{                        
-                        userOrder.orders[currentIndex].meals.push(result);
-                        res.send({body:userOrder});
-                    });
+                if(orderQuantity !=0 ){
+                    userOrder.orders[currentIndex].meal_count = orderQuantity;
                 }
+                else{
+                    userOrder.orders[currentIndex].meal_count = 0;
+                }
+                
+                return result;
+            })
+            .then(result => {
+                if(result.length > 0){                                    
+                    jsonHelper.jsonifyMultipleMeals(client, result).then(meals => { 
+                                                                                                                               
+                        userOrder.orders[currentIndex].meals = meals;                      
+                        res.send({body:userOrder});                                          
+                    })                                                    
+                }                                                                                                  
             })
         }    
     })
-    
 });
 
 app.listen(3000);

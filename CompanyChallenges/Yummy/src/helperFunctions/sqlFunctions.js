@@ -13,11 +13,11 @@ const sqlHelper = {
     getUserOrders: (client, userId) => {
 
         return new Promise((resolve, reject) => {
-            client.query(`SELECT * FROM orders WHERE id=${userId}`, (err, result) =>{
+            client.query(`SELECT * FROM orders WHERE user_id=${userId}`, (err, result) =>{
                 if (err){
                     reject(err);
                 }
-                else{
+                else{                    
                     resolve(result);
                 } 
             });
@@ -45,7 +45,28 @@ const sqlHelper = {
                     reject(err);
                 } 
                 else{
-                    resolve(result[0]);
+                    resolve(result);
+                }
+            });
+        })
+
+        return promise;
+    },
+
+    getMultipleMealAttributes: (client, mealsArray) =>{
+
+        let queryString = `SELECT * FROM meals WHERE id=${mealsArray[0].meal_id}`;
+        for(let i = 1; i < mealsArray.length; i++){
+            queryString = queryString.concat(` OR id=${mealsArray[i].meal_id}`);
+        }
+        
+        const promise = new Promise((resolve, reject) => {
+            client.query(queryString, (err, result) =>{
+                if (err){
+                    reject(err);
+                } 
+                else{
+                    resolve(result);
                 }
             });
         })

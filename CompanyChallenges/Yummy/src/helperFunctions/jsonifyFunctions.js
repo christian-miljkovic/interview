@@ -1,13 +1,12 @@
 // jsonifyFunctions.js
 // Methods to help convert data returned from MySQL to JSON Object
 const sqlHelper = require('./sqlFunctions.js'); 
-const util = require('util');
 
 const jsonHelper = {
 
     jsonifyMeals : (client, mealId, mealQuantity) => {
 
-        return sqlHelper.getMealAttributes(client, mealId, mealQuantity).then(result=>{
+        return sqlHelper.getMealAttributes(client, mealId, mealQuantity).then(result=>{        
             
             if(result != null){
                 let meal = {
@@ -22,12 +21,41 @@ const jsonHelper = {
         });
     },
 
+    jsonifyMultipleMeals: (client, mealsArray) => {
+        return new Promise((resolve) => {
+            sqlHelper.getMultipleMealAttributes(client, mealsArray).then(result=>{        
+            
+                promiseArray = [];
+    
+                for(let i = 0; i < result.length; i++){
+                    promiseArray.push(result[i]);
+                }
+    
+                Promise.all(promiseArray)
+                .then(values => {
+                    newArray = [];
+                    for(let i = 0; i < values.length; i++){
+                        let meal = {
+                            "id":values[i].id,
+                            "quantity": values[i].quantity,
+                            "name":values[i].name,
+                            "description": values[i].description,
+                            "image_url": values[i].image_url
+                        }
+                        newArray.push(meal);
+                    }            
+                    resolve(newArray);
+                })
+             }) 
+            
+        })
+    },
+
     jsonifyOrders : (client, userId) => {
 
         return sqlHelper.getUserOrders(client, userId).then(result=>{
             
             let orders = [];
-
             for(let i = 0; i < result.length; i++){
                 let order = {
                     "id":result[i].id,
