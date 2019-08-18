@@ -15,6 +15,14 @@ const generalHelper = {
     // default: sorts by id ascending
     sortDescending: (userOrder) => {
         userOrder.orders = userOrder.orders.sort((a,b) => (a.id > b.id) ? 1 : -1);
+    },
+
+    getOrderById: (userOrder, lookUpId) => {
+        for(let i =0; i < userOrder.orders.length; i++){
+            if(userOrder.orders[i].id == lookUpId){
+                return userOrder.orders[i];
+            }
+        }
     }
 }
 

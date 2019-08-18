@@ -35,38 +35,38 @@ app.get('/api/v1/orders', async (req,res)=>{
     let userOrder = {
         "orders":[],
     }
-
-    let currentIndex;
     
     jsonHelper.jsonifyOrders(client,userId)
     .then(results =>{
         for(let i = 0; i < results.length; i++){
             
-            let order = results[i];
-            currentIndex = i;
+            let order = results[i];            
 
             userOrder.orders.push(order);
             let orderAttributes = [];
-            jsonHelper.jsonifyOrderAttributes(client,order.id).then(result=>{                               
-                for(let i = 0; i < result.length; i++){
-                    orderAttributes.push(result[i]);
-                }
+            jsonHelper.jsonifyOrderAttributes(client,order.id).then(result=>{                                               
+                for(let j = 0; j < result.length; j++){
+                    orderAttributes.push(result[j]);
+                }                
+
                 let orderQuantity = generalHelper.getOrderSize(orderAttributes);
-                if(orderQuantity !=0 ){
-                    userOrder.orders[currentIndex].meal_count = orderQuantity;
+                let orderObject = generalHelper.getOrderById(userOrder, order.id);
+
+                if(orderQuantity != 0 ){                    
+                    orderObject.meal_count = orderQuantity;
                 }
                 else{
-                    userOrder.orders[currentIndex].meal_count = 0;
+                    orderObject.meal_count = 0;
                 }
                 
-                return result;
+                return orderAttributes;
             })
-            .then(result => {
+            .then(result => {                
                 if(result.length > 0){                                    
-                    jsonHelper.jsonifyMultipleMeals(client, result).then(meals => { 
-                                                                                                                               
-                        userOrder.orders[currentIndex].meals = meals;                      
-                        res.send({body:userOrder});                                          
+                    jsonHelper.jsonifyMultipleMeals(client, result).then(meals => {                                                                                                                            
+                        
+                        let newOrderObject = generalHelper.getOrderById(userOrder, order.id);
+                        newOrderObject.meals = meals;                                                                                        
                     })                                                    
                 }                                                                                                  
             })
