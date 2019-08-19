@@ -23,7 +23,7 @@ const generalHelper = {
                 return userOrder.orders[i];
             }
         }
-    }
+    },
 }
 
 module.exports = generalHelper;

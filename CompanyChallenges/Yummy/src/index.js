@@ -32,6 +32,11 @@ app.get('/api/v1/orders', async (req,res)=>{
     }
 
     const userId = req.query.user_id;
+    const sort = req.query.sort;
+    const direction = req.query.direction;
+    const page = req.query.page;
+    const per = req.query.per;
+
     let userOrder = {
         "orders":[],
     }
@@ -66,11 +71,16 @@ app.get('/api/v1/orders', async (req,res)=>{
                     jsonHelper.jsonifyMultipleMeals(client, result).then(meals => {                                                                                                                            
                         
                         let newOrderObject = generalHelper.getOrderById(userOrder, order.id);
-                        newOrderObject.meals = meals;                                                                                        
+                        newOrderObject.meals = meals;
+                        
+                        if(i == results.length - 1){
+                            res.send(userOrder);
+                        }
                     })                                                    
                 }                                                                                                  
-            })
-        }    
+            })            
+        }
+
     })
 });
 
