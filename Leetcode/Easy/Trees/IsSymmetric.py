@@ -19,6 +19,30 @@ But the following [1,2,2,null,3,null,3] is not:
    3    3
 
 """
+# New cleaner attempt
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+        
+        return is_same(root.left, root.right)
+        
+        
+def is_same(left_node, right_node):
+    
+    if not left_node and not right_node:
+        return True
+    elif not left_node or not right_node:
+        return False
+    else:
+        return left_node.val == right_node.val and is_same(left_node.right, right_node.left) and is_same(left_node.left, right_node.right)
+
+
+
 
 # Successful Attempt
 # Time Complexity: O(n)
