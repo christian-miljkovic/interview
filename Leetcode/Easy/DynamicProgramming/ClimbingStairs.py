@@ -21,7 +21,30 @@ Explanation: There are three ways to climb to the top.
 2. 1 step + 2 steps
 3. 2 steps + 1 step
 """
+# Tabulation
+# Time Complexity: O(n)
+# Time Complexity: O(1)
+class Solution(object):
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 0:
+            return 0
+        
+        prev = 0
+        curr = 1
+        
+        for i in range(n):
+            tmp = prev + curr
+            prev = curr
+            curr = tmp
+        
+        return curr
 
+
+# Memoization
 class Solution:
     
     def climbRec(self, n: int, look_up: list) -> int:
