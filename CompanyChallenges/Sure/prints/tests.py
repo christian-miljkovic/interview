@@ -14,11 +14,11 @@ class BaseViewTest(APITestCase):
     def create_print(size=""):
         if size != "":
             if size == "S":
-                Songs.objects.create(size=size, cost="10.00", shipping_cost="4.99", total_cost="14.99")
+                Prints.objects.create(size=size, cost="10.00", shipping_cost="4.99", total_cost="14.99")
             elif size == "M":
-                Songs.objects.create(size=size, cost="15.00", shipping_cost="5.99", total_cost="20.99")
+                Prints.objects.create(size=size, cost="15.00", shipping_cost="5.99", total_cost="20.99")
             elif size == "L":
-                Songs.objects.create(size=size, cost="20.00", shipping_cost="7.99", total_cost="27.99")
+                Prints.objects.create(size=size, cost="20.00", shipping_cost="7.99", total_cost="27.99")
 
     def setUp(self):
         # add test data

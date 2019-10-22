@@ -40,3 +40,12 @@ Print Info
 - cost
 - shipping cost
 - total 
+
+# Endpoints
+All Prints: http://127.0.0.1:8000/prints/
+
+
+Login Info:
+user: admin2
+password: test1test1
+
