@@ -26,6 +26,49 @@ return its zigzag level order traversal as:
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
+# Cleaner practice version
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+
+        if not root:
+            return []
+  
+        hash_map = collections.OrderedDict()
+        queue = collections.deque()
+        depth = 0
+        queue.append((root,depth))
+  
+        while queue:
+   
+            node, depth = queue.popleft()
+    
+            if depth not in hash_map:
+                hash_map[depth] = []
+
+            hash_map[depth].append(node.val)
+            depth += 1
+            if node.left:
+                queue.append((node.left,depth))
+            if node.right:
+                queue.append((node.right,depth))
+
+        return [reverse_list(node_list, index) for index,node_list in hash_map.items()]
+
+def reverse_list(curr_list, index):
+    if index%2 != 0:
+        return curr_list[::-1]
+    return curr_list
+
+        
+
+
 class Solution:
     def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
         
