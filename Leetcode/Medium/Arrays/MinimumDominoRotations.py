@@ -32,6 +32,8 @@ Note:
 2 <= A.length == B.length <= 20000
 """
 
+# Time Complexity: O(n) where n is the length of the lists
+# Space Complexity: O(1)
 
 class Solution:
     def minDominoRotations(self, A: List[int], B: List[int]) -> int:
