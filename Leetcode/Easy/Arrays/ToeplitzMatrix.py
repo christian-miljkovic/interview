@@ -35,6 +35,29 @@ matrix will have a number of rows and columns in range [1, 20].
 matrix[i][j] will be integers in range [0, 99].
 
 """
+# Time Complexity: O(n) where n is the number of rows
+# Space Complexity: O(m) where m is the size of each row
+
+"""
+Solves follow up: 
+What if the matrix is stored on disk, and the memory is limited such that you can only load at most one row of the matrix into the memory at once?
+What if the matrix is so large that you can only load up a partial row into the memory at once?
+"""
+
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        
+        top_row = collections.deque(matrix[0])
+        
+        for i in range(1, len(matrix)):            
+            row = matrix[i]
+            top_row.pop()
+            top_row.appendleft(row[0])
+            if row != list(top_row):
+                return False
+        
+        return True
+
 
 class Solution(object):
     def isToeplitzMatrix(self, matrix):
