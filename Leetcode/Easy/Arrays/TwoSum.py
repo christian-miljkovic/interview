@@ -28,3 +28,24 @@ def twoSumHashTwo(self, nums, target):
         if(difference in hashTable):
             if(hashTable[difference] != j):
                 return [j, hashTable[difference]]
+
+
+# Reviewed version 
+# Space Complexity: O(n)
+# Time Complexity: O(n)
+
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        hash_map = collections.defaultdict(list)
+        
+        for index, num in enumerate(nums):
+            hash_map[num].append(index)
+            
+        for index, num in enumerate(nums):
+            k = target - num
+            
+            if k in hash_map:
+                for i in hash_map[k]:
+                    for j in hash_map[num]:
+                        if i != j:                            
+                            return [i, j]

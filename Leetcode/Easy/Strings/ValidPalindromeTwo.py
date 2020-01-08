@@ -13,10 +13,42 @@ Input: "race a car"
 Output: false
 """
 
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+class Solution1:
+    def isPalindrome(self, s: str) -> bool:
+        
+        if not s:
+            return True
+        
+        left, right = 0, len(s) - 1
+        
+        while left <= right:
+            
+            left_char = s[left].lower()
+            right_char = s[right].lower()
+            
+            if left_char.isalnum() and right_char.isalnum() and left_char != right_char:
+                return False
+            
+            if not left_char.isalnum() and right_char.isalnum():
+                right += 1
+            if not right_char.isalnum() and left_char.isalnum():
+                left -= 1
+                
+            
+            left += 1
+            right -= 1
+        
+        return True
+                
+
+
 # Time Comlpexity: O(n)
 # Space Complexity: O(n)
 
-class Solution:
+class Solution2:
     def isPalindrome(self, s: str) -> bool:
         if len(s) == 0:
             return True

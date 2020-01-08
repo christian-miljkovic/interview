@@ -29,7 +29,49 @@ Input: "{[]}"
 Output: true
 """
 
+"""
+Input:
+string of special chars 
+
+Edge Cases:
+- duplicates
+- empty str
+- imporper nesting of diff special chars
+
+Output: true or false based on rules
+
+"""
+
+# Time Compelexity: O(n)
+# Space Complexity: O(n)
+
 class Solution:
+    def isValid(self, s: str) -> bool:
+        
+        if not s:
+            return True
+        
+        stack = collections.deque()
+        open_chars = {'(':')', '[':']', '{':'}'}
+        
+        
+        for char in s:
+            if char in open_chars:
+                stack.append(char)
+            else:
+                if not stack:
+                    return False
+                prev_open_char = stack.pop()
+                if open_chars[prev_open_char] != char:
+                    return False
+        if stack:
+            return False
+        
+        return True
+
+
+
+class Solution2:
     def isValid(self, s: str) -> bool:
         
         queue = collections.deque()

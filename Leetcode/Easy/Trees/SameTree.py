@@ -63,3 +63,48 @@ class Solution:
         else:
             return False
         
+
+
+# Less clean solution
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+
+class Solution:
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        
+        if not s and not t:
+            return True
+        elif not s or not t:
+            return False
+        
+        nodes_list = []
+        find_dfs(s, t.val, nodes_list)
+        
+        if nodes_list:
+            for node in nodes_list:
+                if is_same_tree(node, t):
+                    return True
+        
+        return False
+    
+def find_dfs(root, target, return_nodes):
+    
+    if root:        
+        if root.val == target:
+            return_nodes.append(root)
+        
+        find_dfs(root.left, target, return_nodes)
+        find_dfs(root.right, target, return_nodes)    
+        
+    
+    
+def is_same_tree(root_one, root_two):
+    
+    if not root_one and not root_two:
+        return True
+    elif not root_one or not root_two:
+        return False
+    else:
+        return root_one.val == root_two.val and is_same_tree(root_one.left, root_two.left) and is_same_tree(root_one.right, root_two.right)
