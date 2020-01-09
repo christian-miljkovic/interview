@@ -16,7 +16,56 @@ Explanation: 342 + 465 = 807.
 #         self.val = x
 #         self.next = None
 
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
 class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        
+        l1_val = list_to_number(l1)
+        l2_val = list_to_number(l2)
+        
+        total_str = str(l1_val + l2_val)[::-1]
+        head = l1 if l1_val >= l2_val else l2
+        
+        return number_to_list(total_str, head)
+    
+
+def number_to_list(str_number, head):
+    
+    new_head = head
+    curr = head
+    
+    # Overwrite 
+    for index, char in enumerate(str_number):
+        curr.val = int(char)
+        if not curr.next and index < len(str_number) - 1:
+            curr.next = ListNode(None)
+        curr = curr.next
+
+    return new_head
+        
+def list_to_number(head):
+    
+    total = 0
+    base = 1
+    curr = head
+    
+    while curr:
+        total += curr.val * base
+        base *= 10
+        curr = curr.next
+        
+    return total
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution2:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         
         num_one = 0

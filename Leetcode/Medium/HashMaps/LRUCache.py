@@ -24,6 +24,39 @@ cache.get(3);       // returns 3
 cache.get(4);       // returns 4
 """
 
+# Revised solution
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.cache = collections.OrderedDict()
+
+    def get(self, key: int) -> int:
+        
+        if key in self.cache:
+            self.put(key, self.cache[key])
+            return self.cache[key]
+            
+        return -1
+
+    def put(self, key: int, value: int) -> None:
+        
+        if key in self.cache:
+            del self.cache[key]
+        
+        elif len(self.cache) == self.capacity:
+            self.cache.popitem(last=False)
+        
+        self.cache[key] = value
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value) 
+
+
+
 # Efficient use of OrderedDict() class to completely implement
 
 class LRUCache(collections.OrderedDict):
