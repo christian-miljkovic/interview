@@ -43,7 +43,51 @@ Output: island count -> int
 
 """
 
-class Solution(object):
+
+# Cleaner solution
+
+class Solution2:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        
+        if not grid:
+            return 0
+        
+        total_islands = 0
+        
+        for i in range(0, len(grid)):
+            for j in range(0, len(grid[0])):
+                if grid[i][j] == "1":
+                    total_islands += bfs((i, j), grid)                    
+                    
+        return total_islands
+        
+def bfs(start, grid) -> int:
+    
+    
+    queue = collections.deque()
+    queue.append(start)
+    grid[start[0]][start[1]] = "2"
+    directions = {(1,0), (0,1), (-1,0), (0,-1)}
+    
+    
+    while queue:
+        
+        row, col = queue.popleft()
+        
+        print(queue)
+        for move in directions:
+            new_row = row + move[0]
+            new_col = col + move[1]
+            if 0 <= new_row < len(grid) and 0 <= new_col < len(grid[0]) and grid[new_row][new_col] == "1":
+                grid[new_row][new_col] = "2"
+                queue.append((new_row, new_col))
+                
+    
+    return 1
+
+
+
+class Solution1(object):
     def numIslands(self, grid):
         """
         :type grid: List[List[str]]
