@@ -41,7 +41,6 @@ class Solution:
                     curr_num, wait_time = get_full_int(s, index)
 
                 else:
-                    print(char, stack)
                     curr_str += char
             
             wait_time -= 1

@@ -32,8 +32,36 @@ Time Complexity: O(n)
 Space Complexity: O(n)
 
 """
+class SolutionDFS:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, new_color: int) -> List[List[int]]:
+        
+        start = (sr, sc)
+        old_color = image[sr][sc]
+        
+        if old_color == new_color:
+            return image
+        
+        dfs(start, old_color, new_color, image)
+        return image
+        
+        
+        
+def dfs(start, old_color, new_color, image):
+    
+    row, col = start
+    
+    if 0 <= row < len(image) and 0 <= col < len(image[0]) and image[row][col] == old_color:
+        image[row][col] = new_color
+        pos = {(1,0), (0,1), (-1,0), (0,-1)}
+        
+        for x, y in pos:
+            next_pos = (row + x, col + y)
+            
+            dfs(next_pos, old_color, new_color, image)
 
-class Solution:
+
+
+class SolutionBFS:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
         
         is_visited = dict()
