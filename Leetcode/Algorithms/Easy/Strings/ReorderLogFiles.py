@@ -41,7 +41,43 @@ Edge Cases:
 Output: first letterlogs then digit logs
 - Sorted letterlogs ignoring id unless tie, original order of digit logs
 
+
 """
+
+# Cleaner refactored code
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        
+        if not logs:
+            return []
+        
+        alpha_logs, digit_logs = split_log_types(logs)
+        
+        sorted_alpha_logs = sorted(alpha_logs, key=lambda x: (x[1],x[0]))
+        full_list = [x[0] + " " + x[1] for x in sorted_alpha_logs]
+        full_list.extend(digit_logs)
+        
+        return full_list
+        
+        
+        
+def split_log_types(logs):
+    
+    letter_logs = []
+    digit_logs = []
+    
+    for log in logs:
+        alnum, trailing_log = log.split(' ', 1)
+        if trailing_log[-1].isalpha():
+            letter_logs.append((alnum, trailing_log))
+        else:
+            digit_logs.append(log)
+    
+    return letter_logs, digit_logs
+        
+
+
+
 # Time Complexity: O(nm) where n is the size of the logs list, and m is the size of the largest str log
 # Space Complexity: O(n)
 class Solution(object):
