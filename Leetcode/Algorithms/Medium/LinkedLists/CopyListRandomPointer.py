@@ -30,6 +30,50 @@ class Node:
         self.next = next
         self.random = random
 """
+# Refactored 
+
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+class Solution2:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        
+        if not head:
+            return None
+        
+        node_map = dict()
+        new_head = copy_random_node(head, node_map)
+        curr = new_head
+       
+        
+        while head:
+            
+            curr.next = copy_random_node(head.next, node_map)
+            curr.random = copy_random_node(head.random, node_map)
+            
+            curr = curr.next
+            head = head.next
+
+        return new_head
+        
+def copy_random_node(curr_node, node_map):
+    
+    if not curr_node:
+        return None
+    
+    if curr_node not in node_map:
+        random_node = Node(curr_node.val)
+        node_map[curr_node] = random_node
+    
+    return node_map[curr_node]
+
+
+
 # Time Complexity: O(n)
 # Space Complexity: O(n)
 
